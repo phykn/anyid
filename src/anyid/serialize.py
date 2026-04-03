@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image
 
 
-def to_str(arr: np.ndarray, *, level: int = 0, quality: int = 0) -> str:
+def to_str(arr: np.ndarray, *, method: int = 0, quality: int = 0) -> str:
     if arr.dtype != np.uint8:
         raise ValueError("only uint8 array is supported")
 
@@ -13,7 +13,7 @@ def to_str(arr: np.ndarray, *, level: int = 0, quality: int = 0) -> str:
         prefix = b"L" if arr.ndim == 2 else b"C"
 
         b = io.BytesIO()
-        Image.fromarray(arr).save(b, format="WebP", lossless=True, method=level, quality=quality)
+        Image.fromarray(arr).save(b, format="WebP", lossless=True, method=method, quality=quality)
         return base64.b64encode(prefix + b.getvalue()).decode("utf-8")
     except Exception as e:
         raise ValueError(f"err: {e}")
