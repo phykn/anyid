@@ -5,7 +5,7 @@ Fast, unique, and serializable identifiers for NumPy arrays.
 ## Features
 
 - **Stable Deterministic Hash**: Generate consistent IDs from NumPy arrays based on data, shape, and dtype.
-- **Optimized Serialization**: Efficient string representation using WebP Lossless compression and Base85 encoding (optimized for `uint8` image arrays).
+- **Optimized Serialization**: Efficient string representation using WebP Lossless compression and Base64 encoding (optimized for `uint8` image arrays).
 - **Zero Loss**: 100% lossless reconstruction of pixel values and array shapes.
 
 ## Installation

@@ -32,6 +32,6 @@ def test_efficiency():
     # Gradient should result in a very short string compared to raw
     grad = np.tile(np.linspace(0, 255, 256, dtype=np.uint8), (256, 1))
     s = to_str(grad)
-    # 256*256*1 bytes = 65,536 bytes. Base64/85 should be around ~80,000+ chars if uncompressed.
+    # 256*256*1 bytes = 65,536 bytes. Base64 should be around ~87,000+ chars if uncompressed.
     # But WebP Lossless for gradient should be very small.
     assert len(s) < 1000  # Expect highly efficient compression

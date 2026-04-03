@@ -14,14 +14,14 @@ def to_str(arr: np.ndarray) -> str:
 
         b = io.BytesIO()
         Image.fromarray(arr).save(b, format="WebP", lossless=True)
-        return base64.b85encode(prefix + b.getvalue()).decode("utf-8")
+        return base64.b64encode(prefix + b.getvalue()).decode("utf-8")
     except Exception as e:
         raise ValueError(f"err: {e}")
 
 
 def to_arr(s: str) -> np.ndarray:
     try:
-        data = base64.b85decode(s)
+        data = base64.b64decode(s)
         prefix, webp_data = data[:1], data[1:]
 
         b = io.BytesIO(webp_data)
