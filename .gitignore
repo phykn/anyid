@@ -1,8 +1,12 @@
 __pycache__/
+*.py[cod]
 .venv/
 .pytest_cache/
-*.py[cod]
-.DS_Store
-dist/
+.ruff_cache/
 build/
+dist/
 *.egg-info/
+.DS_Store
+.codex
+AGENTS.md
+Agents.md
