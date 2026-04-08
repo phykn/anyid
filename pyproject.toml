@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "anyid"
+name = "imstr"
 version = "0.1.0"
-description = "Fast, unique, and serializable IDs for NumPy arrays"
+description = "Compact serialization of NumPy uint8 arrays via WebP + base64"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
@@ -19,4 +19,4 @@ test = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/anyid"]
+packages = ["src/imstr"]

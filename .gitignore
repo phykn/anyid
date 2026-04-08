@@ -1,12 +1,9 @@
 __pycache__/
 *.py[cod]
+*.egg-info/
 .venv/
 .pytest_cache/
-.ruff_cache/
 build/
 dist/
-*.egg-info/
-.DS_Store
-.codex
-AGENTS.md
-Agents.md
+.claude/
+CLAUDE.md

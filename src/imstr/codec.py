@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image
 
 
-def to_str(arr: np.ndarray, *, method: int = 0, quality: int = 0) -> str:
+def encode(arr: np.ndarray, *, method: int = 0, quality: int = 0) -> str:
     if arr.dtype != np.uint8:
         raise ValueError("only uint8 array is supported")
     if arr.ndim == 2:
@@ -30,7 +30,7 @@ def to_str(arr: np.ndarray, *, method: int = 0, quality: int = 0) -> str:
         raise ValueError(f"failed to serialize array: {exc}") from exc
 
 
-def to_arr(encoded_str: str) -> np.ndarray:
+def decode(encoded_str: str) -> np.ndarray:
     try:
         payload = base64.b64decode(encoded_str, validate=True)
         if len(payload) < 2:
