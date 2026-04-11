@@ -5,7 +5,6 @@ from imstr.codec import encode, decode
 
 
 def test_lossless_random():
-    # Test random 256x256 uint8 RGB
     arr = np.random.randint(0, 256, (256, 256, 3), dtype=np.uint8)
     s = encode(arr)
     arr_back = decode(s)
@@ -16,7 +15,6 @@ def test_lossless_random():
 
 
 def test_lossless_grayscale():
-    # Test random 100x100 uint8 Grayscale
     arr = np.random.randint(0, 256, (100, 100), dtype=np.uint8)
     s = encode(arr)
     arr_back = decode(s)
@@ -27,19 +25,17 @@ def test_lossless_grayscale():
 
 
 def test_other_dtype_fails():
-    # Test that float32 fails as expected
     arr = np.random.rand(10, 10).astype(np.float32)
     with pytest.raises(ValueError, match="only uint8 array is supported"):
         encode(arr)
 
 
 def test_efficiency():
-    # Gradient should result in a very short string compared to raw
+    # 65,536 raw bytes → ~87k base64 chars uncompressed; WebP lossless crushes
+    # a gradient to well under 1k.
     grad = np.tile(np.linspace(0, 255, 256, dtype=np.uint8), (256, 1))
     s = encode(grad)
-    # 256*256*1 bytes = 65,536 bytes. Base64 should be around ~87,000+ chars if uncompressed.
-    # But WebP Lossless for gradient should be very small.
-    assert len(s) < 1000  # Expect highly efficient compression
+    assert len(s) < 1000
 
 
 def test_invalid_base64_fails():
@@ -74,9 +70,6 @@ def test_invalid_channel_count_fails():
 
 
 def test_valid_prefix_empty_webp_fails():
-    # 1-byte payload: valid prefix, no WebP data.
-    # After removing the len<2 guard, this must still raise ValueError
-    # via the Image.open failure path.
     for prefix in (b"L", b"C"):
         s = base64.b64encode(prefix).decode("utf-8")
         with pytest.raises(ValueError, match="failed to deserialize array"):
