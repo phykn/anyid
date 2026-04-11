@@ -71,3 +71,13 @@ def test_invalid_channel_count_fails():
     arr = np.random.randint(0, 256, (10, 10, 2), dtype=np.uint8)
     with pytest.raises(ValueError, match="array must be 2D grayscale or 3D RGB/RGBA"):
         encode(arr)
+
+
+def test_valid_prefix_empty_webp_fails():
+    # 1-byte payload: valid prefix, no WebP data.
+    # After removing the len<2 guard, this must still raise ValueError
+    # via the Image.open failure path.
+    for prefix in (b"L", b"C"):
+        s = base64.b64encode(prefix).decode("utf-8")
+        with pytest.raises(ValueError, match="failed to deserialize array"):
+            decode(s)

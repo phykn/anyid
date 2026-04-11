@@ -33,9 +33,6 @@ def encode(arr: np.ndarray, *, method: int = 0, quality: int = 0) -> str:
 def decode(encoded_str: str) -> np.ndarray:
     try:
         payload = base64.b64decode(encoded_str, validate=True)
-        if len(payload) < 2:
-            raise ValueError("payload is too short")
-
         prefix, webp_data = payload[:1], payload[1:]
         if prefix not in (b"L", b"C"):
             raise ValueError("invalid payload prefix")
