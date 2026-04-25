@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "imstr"
-version = "0.1.1"
+version = "0.1.2"
 description = "Compact serialization of NumPy uint8 arrays via WebP + base64"
 readme = "README.md"
 requires-python = ">=3.8"
