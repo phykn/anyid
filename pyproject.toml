@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "imstr"
-version = "0.1.2"
+version = "0.1.3"
 description = "Compact serialization of NumPy uint8 arrays via WebP + base64"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -20,3 +20,6 @@ test = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/imstr"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

@@ -51,9 +51,8 @@ def decode(encoded_str: str) -> np.ndarray:
     2D grayscale or 3D RGB/RGBA array.
 
     Raises:
-        ValueError: with message starting ``"invalid payload prefix"`` if the
-            leading byte is neither ``b"L"`` nor ``b"C"``, or ``"failed to
-            deserialize array"`` if base64 decoding or WebP decoding fails.
+        ValueError: with message starting ``"failed to deserialize array"`` if
+            base64 decoding, payload prefix validation, or WebP decoding fails.
     """
     try:
         payload = base64.b64decode(encoded_str, validate=True)
